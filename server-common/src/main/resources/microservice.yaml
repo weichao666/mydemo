@@ -1,0 +1,9 @@
+servicecomb-config-order: -1
+
+#cse:
+#  test:
+#    duplicate1: older
+
+#servicecomb:
+#  test:
+#    duplicate2: older

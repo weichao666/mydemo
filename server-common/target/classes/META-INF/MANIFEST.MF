@@ -1,0 +1,70 @@
+Manifest-Version: 1.0
+Built-By: Administrator
+Class-Path: . lib/cse-solution-service-engine-2.3.35.jar lib/foundatio
+ n-auth-2.3.35.jar lib/foundation-ssl-1.1.0.B006.jar lib/commons-confi
+ guration-1.10.jar lib/netty-tcnative-boringssl-static-2.0.7.Final.jar
+  lib/commons-io-2.4.jar lib/foundation-config-1.1.0.B006.jar lib/spri
+ ng-beans-4.3.16.RELEASE.jar lib/snakeyaml-1.16.jar lib/netty-codec-4.
+ 1.24.Final.jar lib/netty-codec-http-4.1.24.Final.jar lib/netty-codec-
+ http2-4.1.24.Final.jar lib/netty-common-4.1.24.Final.jar lib/netty-ha
+ ndler-4.1.24.Final.jar lib/netty-buffer-4.1.24.Final.jar lib/netty-co
+ dec-socks-4.1.24.Final.jar lib/netty-handler-proxy-4.1.24.Final.jar l
+ ib/netty-resolver-4.1.24.Final.jar lib/netty-transport-4.1.24.Final.j
+ ar lib/config-cc-1.1.0.B006.jar lib/foundation-vertx-1.1.0.B006.jar l
+ ib/vertx-core-3.5.0.jar lib/netty-resolver-dns-4.1.24.Final.jar lib/n
+ etty-codec-dns-4.1.24.Final.jar lib/vertx-web-3.5.0.jar lib/vertx-aut
+ h-common-3.5.0.jar lib/vertx-bridge-common-3.5.0.jar lib/slf4j-log4j1
+ 2-1.7.7.jar lib/slf4j-api-1.7.7.jar lib/log4j-1.2.17.jar lib/transpor
+ t-highway-1.1.0.B006.jar lib/common-protobuf-1.1.0.B006.jar lib/proto
+ stuff-core-1.5.2.jar lib/protostuff-api-1.5.2.jar lib/protostuff-runt
+ ime-1.5.2.jar lib/protostuff-collectionschema-1.5.2.jar lib/jackson-d
+ ataformat-protobuf-2.9.6.jar lib/protoparser-4.0.3.jar lib/common-jav
+ assist-1.1.0.B006.jar lib/javassist-3.18.1-GA.jar lib/foundation-metr
+ ics-1.1.0.B006.jar lib/spectator-reg-servo-0.63.0.jar lib/spectator-a
+ pi-0.63.0.jar lib/transport-rest-vertx-1.1.0.B006.jar lib/transport-r
+ est-client-1.1.0.B006.jar lib/transport-rest-servlet-1.1.0.B006.jar l
+ ib/javax.servlet-api-3.1.0.jar lib/spring-webmvc-4.3.16.RELEASE.jar l
+ ib/spring-aop-4.3.16.RELEASE.jar lib/spring-core-4.3.16.RELEASE.jar l
+ ib/spring-expression-4.3.16.RELEASE.jar lib/spring-web-4.3.16.RELEASE
+ .jar lib/provider-springmvc-1.1.0.B006.jar lib/provider-rest-common-1
+ .1.0.B006.jar lib/swagger-invocation-springmvc-1.1.0.B006.jar lib/swa
+ gger-generator-springmvc-1.1.0.B006.jar lib/swagger-generator-core-1.
+ 1.0.B006.jar lib/swagger-core-1.5.12.jar lib/jackson-dataformat-yaml-
+ 2.9.6.jar lib/swagger-models-1.5.12.jar lib/swagger-annotations-1.5.1
+ 2.jar lib/provider-pojo-1.1.0.B006.jar lib/provider-jaxrs-1.1.0.B006.
+ jar lib/swagger-invocation-jaxrs-1.1.0.B006.jar lib/swagger-generator
+ -jaxrs-1.1.0.B006.jar lib/handler-bizkeeper-1.1.0.B006.jar lib/hystri
+ x-core-1.5.10.jar lib/HdrHistogram-2.1.9.jar lib/handler-fault-inject
+ ion-1.1.0.B006.jar lib/handler-flowcontrol-qps-1.1.0.B006.jar lib/han
+ dler-loadbalance-1.1.0.B006.jar lib/ribbon-2.2.2.jar lib/ribbon-trans
+ port-2.2.2.jar lib/rxnetty-contexts-0.4.9.jar lib/rxnetty-servo-0.4.9
+ .jar lib/rxnetty-0.4.9.jar lib/ribbon-loadbalancer-2.2.2.jar lib/netf
+ lix-statistics-0.1.1.jar lib/servo-core-0.10.1.jar lib/servo-internal
+ -0.10.1.jar lib/netflix-commons-util-0.1.1.jar lib/ribbon-core-2.2.2.
+ jar lib/archaius-core-0.7.3.jar lib/jackson-core-2.9.6.jar lib/rxjava
+ -1.1.6.jar lib/commons-lang-2.6.jar lib/cse-handler-performance-stats
+ -2.3.35.jar lib/cse-handler-tcc-2.3.35.jar lib/guava-19.0.jar lib/asp
+ ectjweaver-1.8.8.jar lib/cse-handler-cloud-extension-2.3.35.jar lib/s
+ ervice-registry-1.1.0.B006.jar lib/swagger-invocation-validator-1.1.0
+ .B006.jar lib/swagger-invocation-core-1.1.0.B006.jar lib/hibernate-va
+ lidator-6.0.2.Final.jar lib/validation-api-2.0.0.Final.jar lib/jboss-
+ logging-3.2.1.Final.jar lib/classmate-1.3.4.jar lib/javax.el-3.0.0.ja
+ r lib/handler-tracing-zipkin-1.1.0.B006.jar lib/foundation-common-1.1
+ .0.B006.jar lib/jackson-dataformat-xml-2.9.6.jar lib/jackson-module-j
+ axb-annotations-2.8.11.jar lib/stax2-api-3.1.4.jar lib/woodstox-core-
+ 5.0.3.jar lib/jackson-databind-2.9.6.jar lib/jackson-annotations-2.9.
+ 6.jar lib/spring-context-4.3.16.RELEASE.jar lib/httpclient-4.5.2.jar 
+ lib/httpcore-4.4.9.jar lib/commons-logging-1.2.jar lib/commons-codec-
+ 1.10.jar lib/javax.ws.rs-api-2.0.1.jar lib/commons-lang3-3.3.2.jar li
+ b/java-chassis-core-1.1.0.B006.jar lib/common-rest-1.1.0.B006.jar lib
+ /brave-spring-beans-4.13.1.jar lib/brave-instrumentation-http-4.13.1.
+ jar lib/zipkin-reporter-spring-beans-2.2.2.jar lib/brave-4.13.1.jar l
+ ib/zipkin-2.4.2.jar lib/zipkin-reporter-2.5.0.jar lib/zipkin-sender-o
+ khttp3-2.2.2.jar lib/okhttp-3.4.1.jar lib/okio-1.9.0.jar lib/brave-co
+ ntext-log4j12-4.13.1.jar lib/jsr305-3.0.1.jar lib/javax.inject-1.jar 
+ lib/spring-aspects-4.3.16.RELEASE.jar lib/handler-publickey-auth-1.1.
+ 0.B006.jar
+Build-Jdk: 1.8.0_172
+Created-By: Maven Integration for Eclipse
+Main-Class: ${your-package}.Application
+
