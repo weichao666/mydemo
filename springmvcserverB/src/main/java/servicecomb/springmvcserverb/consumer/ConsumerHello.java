@@ -34,6 +34,23 @@ public class ConsumerHello {
     return sayHelloResult;
   }
 
+  public ResponseEntity<Person> testHeader(Person person) {
+    HttpHeaders header = new HttpHeaders();
+    header.add("fromRequestHeader", "requestHeader");
+    header.add("fromHttpServletRequest", "httpServletRequest");
+    HttpEntity<Person> requestEntity = new HttpEntity<>(person, header);
+    ResponseEntity<Person> resEntity = restTemplate.exchange("cse://springmvcc/springmvchelloc/testHeader",
+            HttpMethod.POST,
+            requestEntity,
+            Person.class);
+    HttpHeaders headers = resEntity.getHeaders();
+    System.out.println("content-type: " + headers.getContentType());
+    System.out.println("content-disposition: " + headers.getFirst(HttpHeaders.CONTENT_DISPOSITION));
+    System.out.println("custom: " + headers.getFirst("custom"));
+    System.out.println(resEntity.getBody());
+    return resEntity;
+  }
+
   public String testInstanceIsolation(Integer delaytime) {
     String result = restTemplate.getForObject(
         "cse://springmvcc/springmvchelloc/instanceisolation?delaytime=" + delaytime, String.class);

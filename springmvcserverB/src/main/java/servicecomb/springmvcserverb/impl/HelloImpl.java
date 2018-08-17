@@ -3,6 +3,7 @@ package servicecomb.springmvcserverb.impl;
 import org.apache.servicecomb.provider.rest.common.RestSchema;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +32,12 @@ public class HelloImpl implements Hello{
   public String sayHello(@RequestBody Person person) {
     String result = consumerHello.sayHello(person);
     return result;
+  }
+
+  @RequestMapping(path = "/testHeader", method = RequestMethod.POST)
+  public ResponseEntity<Person> testHeader(@RequestBody Person person) {
+    ResponseEntity<Person> resEntity = consumerHello.testHeader(person);
+    return resEntity;
   }
 
   @GetMapping(path = "/testinstanceisolation")
