@@ -30,5 +30,8 @@ public class Person {
   public void setMan(boolean man) {
     this.man = man;
   }
-  
+
+  public String toString() {
+    return "name=" + name + ";age=" + age + ";man=" + man;
+  }
 }

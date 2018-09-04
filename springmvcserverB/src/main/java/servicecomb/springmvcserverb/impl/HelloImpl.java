@@ -40,6 +40,12 @@ public class HelloImpl implements Hello{
     return resEntity;
   }
 
+  @RequestMapping(path = "/testSessionStick", method = RequestMethod.GET)
+  public String testSessionStick(@RequestParam(name = "name") String name, @RequestParam("delaytime") int delaytime) {
+    String result = consumerHello.testSessionStick(name, delaytime);
+    return result;
+  }
+
   @GetMapping(path = "/testinstanceisolation")
   public String testInstanceIsolation(@RequestParam(name = "delaytime") Integer delaytime, 
       @RequestParam(name = "percent") Integer percent, @RequestParam(name = "time") Integer time) {
@@ -52,6 +58,7 @@ public class HelloImpl implements Hello{
     for (int i = 0; i < percent; i++) {
       try {
         result = consumerHello.testInstanceIsolation(delaytime);
+        System.out.println(result);
       } catch (Exception e) {
         System.out.println("error: time-out and fallback disabled.");
       }

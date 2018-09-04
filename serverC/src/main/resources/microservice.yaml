@@ -4,6 +4,8 @@ APPLICATION_ID: demotest
 service_description:
   name: pojoc
   version: 0.0.1
+  properties:
+    allowCrossApp: true
 cse:
   service:
     registry:

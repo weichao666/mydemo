@@ -1,9 +1,11 @@
 yuming: https://cse.cn-north-1.myhuaweicloud.com:443
 
-APPLICATION_ID: demotest
+APPLICATION_ID: demotest1
 service_description:
   name: pojoc
   version: 0.0.1
+  properties:
+    allowCrossApp: true
 cse:
   service:
     registry:

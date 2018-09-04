@@ -32,7 +32,9 @@ public class SpringMvcHelloImpl implements Hello {
   }
 
   @RequestMapping(path = "/testHeader", method = RequestMethod.POST)
-  public ResponseEntity<Person> testHeader(@RequestBody Person person, @RequestHeader("fromRequestHeader") String fromRequestHeader, HttpServletRequest request) {
+  public ResponseEntity<Person> testHeader(@RequestBody Person person,
+                                           @RequestHeader("fromRequestHeader") String fromRequestHeader,
+                                           HttpServletRequest request) {
     // get header from header
     System.out.println("fromRequestHeader = " + request.getHeader("fromHttpServletRequest"));
     // get header from HttpServletRequest
@@ -49,6 +51,18 @@ public class SpringMvcHelloImpl implements Hello {
                              @CookieValue("cook") int cook) {
     String result = "name=" + name + "; age=" + age + "; header=" + header + "; formdata=" + formdata
             + "; cookie=" + cook;
+    return result;
+  }
+
+  @RequestMapping(path = "/testSessionStick", method = RequestMethod.GET)
+  public String testSessionStick(@RequestParam(name = "name") String name, @RequestParam("delaytime") int delaytime) {
+    try {
+      Thread.sleep(delaytime * 1000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+    String result = "visit success, result=" + name+ ", delaytime=" + delaytime + ", this is instance1";
+    System.out.println(result);
     return result;
   }
 

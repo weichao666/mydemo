@@ -51,6 +51,13 @@ public class ConsumerHello {
     return resEntity;
   }
 
+  public String testSessionStick(String name, int delaytime) {
+    String result = restTemplate.getForObject(
+            "cse://springmvcc/springmvchelloc/testSessionStick?name=" + name + "&delaytime=" + delaytime, String.class);
+    System.out.println(result);
+    return result;
+  }
+
   public String testInstanceIsolation(Integer delaytime) {
     String result = restTemplate.getForObject(
         "cse://springmvcc/springmvchelloc/instanceisolation?delaytime=" + delaytime, String.class);
