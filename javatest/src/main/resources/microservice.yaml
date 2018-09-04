@@ -1,0 +1,62 @@
+yuming: https://cse.cn-north-1.myhuaweicloud.com
+
+APPLICATION_ID: javatest
+service_description:
+  name: testcase
+  version: 0.0.1
+#instance 
+#instance_description:
+#  properties:
+#    tag: test
+
+cse:
+  service:
+    registry:
+#      address: http://127.0.0.1:30100
+      address: ${yuming}
+      instance:
+        watch: false
+  rest:
+    address: 0.0.0.0:8000
+#    address: 0.0.0.0:8080?protocol=http2
+#  highway:
+#    address: 0.0.0.0:7091
+  config:
+    client:
+      serverUri: ${yuming}
+      refreshPort: 30104
+      refreshMode: 1
+      refresh_interval: 5000
+  monitor:
+    client:
+      serverUri: ${yuming}
+#      enable: false
+  handler:
+    chain:
+      Provider:
+        default: tcc-server,bizkeeper-provider,qps-flowcontrol-provider #,auth-provider
+      Consumer:
+        default: loadbalance,bizkeeper-consumer,qps-flowcontrol-consumer,tracing-consumer
+  isolation:
+    Provider:
+      timeout:
+        enabled: true
+      timeoutInMilliseconds: 60000
+#  tracing: 
+#    collector: 
+#      address: http://zipkin.servicecomb.io:9411
+  publicKey:
+    accessControl:
+      black:
+        list01:
+          category: property  #property,fixed value
+#          propertyName: serviceName
+          propertyName: version
+#          rule: springmvca
+          rule: 0.0.1
+
+  credentials:
+    accessKey: SSSAFPNRTYAYZTD5ALOH
+    secretKey: ur4Sf3spkUFpIBpqQDbRjC3dJRgbe6WU21ueJdge
+    project: cn-north-1
+    akskCustomCipher: default
