@@ -33,7 +33,7 @@ public class SpringMvcHelloImpl implements Hello {
 
   @RequestMapping(path = "/testHeader", method = RequestMethod.POST)
   public ResponseEntity<Person> testHeader(@RequestBody Person person,
-                                           @RequestHeader("fromRequestHeader") String fromRequestHeader,
+                                           @RequestHeader(value = "requestHeader") String fromRequestHeader,
                                            HttpServletRequest request) {
     // get header from header
     System.out.println("fromRequestHeader = " + request.getHeader("fromHttpServletRequest"));
@@ -47,7 +47,7 @@ public class SpringMvcHelloImpl implements Hello {
 
   @RequestMapping(path = "/allparam/{name}", method = RequestMethod.POST)
   public String testAllParam(@PathVariable(name = "name") String name, @RequestParam("age") int age,
-                             @RequestHeader("header") int header, @RequestPart("formdata") int formdata,
+                             @RequestHeader("header") String header, @RequestPart("formdata") int formdata,
                              @CookieValue("cook") int cook) {
     String result = "name=" + name + "; age=" + age + "; header=" + header + "; formdata=" + formdata
             + "; cookie=" + cook;

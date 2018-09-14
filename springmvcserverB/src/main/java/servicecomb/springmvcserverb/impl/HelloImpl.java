@@ -1,18 +1,19 @@
 package servicecomb.springmvcserverb.impl;
 
 import org.apache.servicecomb.provider.rest.common.RestSchema;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import servicecomb.demo.bean.Person;
 import servicecomb.demo.common.Hello;
 import servicecomb.springmvcserverb.consumer.ConsumerHello;
+
+import javax.servlet.http.HttpServletRequest;
 
 @RestSchema(schemaId = "springmvcHello")
 @RequestMapping(path = "/springmvchellob", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -40,6 +41,18 @@ public class HelloImpl implements Hello{
     return resEntity;
   }
 
+  @RequestMapping(path = "/allparam/{name}", method = RequestMethod.POST)
+  public String testAllParam(@PathVariable(name = "name") String name, @RequestParam("age") int age,
+                             @RequestHeader("header") String header, @RequestPart("formdata") int formdata,
+                             @CookieValue("cook") int cook,
+                             HttpServletRequest request) {
+    String result = "name=" + name + "; age=" + age + "; header=" + header + "; formdata=" + formdata
+            + "; cookie=" + cook;
+    System.out.println(result);
+    String results = consumerHello.testAllParam(request);
+    return results;
+  }
+
   @RequestMapping(path = "/testSessionStick", method = RequestMethod.GET)
   public String testSessionStick(@RequestParam(name = "name") String name, @RequestParam("delaytime") int delaytime) {
     String result = consumerHello.testSessionStick(name, delaytime);
@@ -51,10 +64,6 @@ public class HelloImpl implements Hello{
       @RequestParam(name = "percent") Integer percent, @RequestParam(name = "time") Integer time) {
     String result = "";
 
-    for (int i = 0; i < time-percent; i++) {
-      result = consumerHello.testInstanceIsolation(0);
-      System.out.println(result);
-    }
     for (int i = 0; i < percent; i++) {
       try {
         result = consumerHello.testInstanceIsolation(delaytime);
@@ -63,6 +72,10 @@ public class HelloImpl implements Hello{
         System.out.println("error: time-out and fallback disabled.");
       }
       
+    }
+    for (int i = 0; i < time-percent; i++) {
+      result = consumerHello.testInstanceIsolation(0);
+      System.out.println(result);
     }
     return "invoke finished";
   }

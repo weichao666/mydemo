@@ -45,15 +45,15 @@ cse:
 #  tracing: 
 #    collector: 
 #      address: http://zipkin.servicecomb.io:9411
-  publicKey:
-    accessControl:
-      black:
-        list01:
-          category: property  #property,fixed value
+#  publicKey:
+#    accessControl:
+#      black:
+#        list01:
+#          category: property  #property,fixed value
 #          propertyName: serviceName
-          propertyName: version
+#          propertyName: version
 #          rule: springmvca
-          rule: 0.0.1
+#          rule: 0.0.1
 
   credentials:
     accessKey: SSSAFPNRTYAYZTD5ALOH

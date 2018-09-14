@@ -1,17 +1,30 @@
 package servicecomb.springmvcserverb.consumer;
 
 import org.apache.servicecomb.provider.springmvc.reference.RestTemplateBuilder;
+import org.json.JSONObject;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
 import servicecomb.demo.bean.JAXBJob;
 import servicecomb.demo.bean.JAXBPerson;
 import servicecomb.demo.bean.Person;
+
+import javax.servlet.ServletException;
+import javax.servlet.ServletInputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.Part;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Component
 public class ConsumerHello {
@@ -51,6 +64,24 @@ public class ConsumerHello {
     return resEntity;
   }
 
+  public String testAllParam(HttpServletRequest request) {
+    System.out.println("pathinfo: " + request.getPathInfo());
+    String path = request.getPathInfo().replace("springmvchellob", "springmvchelloc");
+    System.out.println(request.getQueryString());
+    HttpHeaders headers = new HttpHeaders();
+    headers.add("header", "21");
+    headers.add(HttpHeaders.COOKIE, "cook=23");
+
+    Map<String, Integer> map = new HashMap<>();
+    map.put("formdata", 22);
+    HttpEntity entity = new HttpEntity(map, headers);
+    ResponseEntity<String> resEntity = restTemplate.exchange("cse://springmvcc" + path + "?" + request.getQueryString(),
+            HttpMethod.POST,
+            entity,
+            String.class);
+    return resEntity.getBody();
+  }
+
   public String testSessionStick(String name, int delaytime) {
     String result = restTemplate.getForObject(
             "cse://springmvcc/springmvchelloc/testSessionStick?name=" + name + "&delaytime=" + delaytime, String.class);
@@ -78,4 +109,5 @@ public class ConsumerHello {
         JAXBPerson.class);
     return resEntity.getBody().toString();
   }
+
 }
