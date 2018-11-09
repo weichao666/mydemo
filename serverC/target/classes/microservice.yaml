@@ -1,6 +1,6 @@
 yuming: https://cse.cn-north-1.myhuaweicloud.com:443
 
-APPLICATION_ID: demotest1
+APPLICATION_ID: demotest
 service_description:
   name: pojoc
   version: 0.0.1

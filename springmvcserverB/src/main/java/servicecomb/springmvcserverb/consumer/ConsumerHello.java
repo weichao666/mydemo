@@ -1,6 +1,7 @@
 package servicecomb.springmvcserverb.consumer;
 
 import org.apache.servicecomb.provider.springmvc.reference.RestTemplateBuilder;
+import org.apache.servicecomb.swagger.invocation.context.ContextUtils;
 import org.json.JSONObject;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -21,10 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Component
 public class ConsumerHello {
@@ -110,4 +108,12 @@ public class ConsumerHello {
     return resEntity.getBody().toString();
   }
 
+  public String testMap(String name) {
+    List list = new ArrayList();
+//    list.add(name);
+//    list.add("tom");
+    List result = restTemplate.getForObject(
+            "cse://springmvcc/springmvchelloc/testList", List.class);
+    return result.toString();
+  }
 }

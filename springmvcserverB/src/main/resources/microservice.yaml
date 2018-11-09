@@ -35,27 +35,32 @@ cse:
         default: tcc-server,bizkeeper-provider,qps-flowcontrol-provider
       Consumer:
         default: loadbalance,bizkeeper-consumer,qps-flowcontrol-consumer,auth-consumer
+#  request:
+#    timeout: 1000
 #  isolation:
 #    Consumer:
 #      timeout:
 #        enabled: true
 #      timeoutInMilliseconds: 1000
-  fallback:
-    Consumer:
-      enabled: false
+#  fallback:
+#    Consumer:
+#      enabled: false
   credentials:
     accessKey: SSSAFPNRTYAYZTD5ALOH
     secretKey: ur4Sf3spkUFpIBpqQDbRjC3dJRgbe6WU21ueJdge
     project: cn-north-1
     akskCustomCipher: default
   loadbalance:
+    retryEnabled: true
+    retryOnSame: 0
+    retryOnNext: 1
 #    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.WeightedResponseTimeRule
 #    springmvcc:
 #      transactionControl:
 #        options:
 #          tag: test
     isolation:
-      enabled: true
+      enabled: false
       errorThresholdPercentage: 100
       enableRequestThreshold: 3
       singleTestTime: 5000
@@ -66,5 +71,4 @@ cse:
 #    SessionStickinessRule:
 #      sessionTimeoutInSeconds: 30
 #      successiveFailedTimes: 2
-
 

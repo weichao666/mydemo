@@ -1,6 +1,10 @@
 package servicecomb.springmvcserverc.impl;
 
+import org.apache.servicecomb.core.Invocation;
+import org.apache.servicecomb.core.invocation.InvocationFactory;
 import org.apache.servicecomb.provider.rest.common.RestSchema;
+import org.apache.servicecomb.swagger.invocation.context.ContextUtils;
+import org.apache.servicecomb.swagger.invocation.context.InvocationContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
@@ -13,6 +17,8 @@ import servicecomb.demo.bean.Person;
 import servicecomb.demo.common.Hello;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+import java.util.Map;
 
 @RestSchema(schemaId = "springmvcHello")
 @RequestMapping(path = "/springmvchelloc", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -22,7 +28,13 @@ public class SpringMvcHelloImpl implements Hello {
   @Override
   @RequestMapping(path = "/sayhi", method = RequestMethod.POST)
   public String sayHi(String name) {
-    return "name:" + name;
+    System.out.println("instance1");
+    return "instance1:" + name;
+  }
+
+  @RequestMapping(path = "/testList", method = RequestMethod.GET)
+  public List<String> testList(@RequestParam(name = "name") List<String> name) {
+    return name;
   }
 
   @Override

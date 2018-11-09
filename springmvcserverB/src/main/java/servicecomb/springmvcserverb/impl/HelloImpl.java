@@ -14,6 +14,7 @@ import servicecomb.demo.common.Hello;
 import servicecomb.springmvcserverb.consumer.ConsumerHello;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 @RestSchema(schemaId = "springmvcHello")
 @RequestMapping(path = "/springmvchellob", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -25,6 +26,12 @@ public class HelloImpl implements Hello{
   @RequestMapping(path = "/sayhi", method = RequestMethod.POST)
   public String sayHi(@RequestParam(name = "name") String name) {
     String result = consumerHello.sayHi(name);
+    return result;
+  }
+
+  @RequestMapping(path = "/testList", method = RequestMethod.GET)
+  public String testList(@RequestParam("name") String name) {
+    String result = consumerHello.testMap(name);
     return result;
   }
 
