@@ -14,6 +14,7 @@ import servicecomb.demo.common.Hello;
 import servicecomb.springmvcserverb.consumer.ConsumerHello;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.Map;
 
 @RestSchema(schemaId = "springmvcHello")
@@ -46,6 +47,12 @@ public class HelloImpl implements Hello{
   public ResponseEntity<Person> testHeader(@RequestBody Person person) {
     ResponseEntity<Person> resEntity = consumerHello.testHeader(person);
     return resEntity;
+  }
+
+  @RequestMapping(path = "/testHeaderResponse", method = RequestMethod.GET)
+  public ResponseEntity<Date> testHeaderResponse() {
+    ResponseEntity<Date> responseEntity = consumerHello.testHeaderResponse();
+    return responseEntity;
   }
 
   @RequestMapping(path = "/allparam/{name}", method = RequestMethod.POST)

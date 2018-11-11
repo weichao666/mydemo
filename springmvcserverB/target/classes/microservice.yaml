@@ -32,7 +32,7 @@ cse:
   handler:
     chain:
       Provider:
-        default: tcc-server,bizkeeper-provider,qps-flowcontrol-provider
+        default: bizkeeper-provider,qps-flowcontrol-provider
       Consumer:
         default: loadbalance,bizkeeper-consumer,qps-flowcontrol-consumer,auth-consumer
 #  request:

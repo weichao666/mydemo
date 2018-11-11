@@ -1,13 +1,11 @@
 package servicecomb.springmvcserverb.consumer;
 
+import org.apache.servicecomb.provider.springmvc.reference.CseHttpEntity;
 import org.apache.servicecomb.provider.springmvc.reference.RestTemplateBuilder;
+import org.apache.servicecomb.serviceregistry.RegistryUtils;
 import org.apache.servicecomb.swagger.invocation.context.ContextUtils;
 import org.json.JSONObject;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
@@ -60,6 +58,31 @@ public class ConsumerHello {
     System.out.println("custom: " + headers.getFirst("custom"));
     System.out.println(resEntity.getBody());
     return resEntity;
+  }
+
+  public ResponseEntity<Date> testHeaderResponse() {
+      Map<String, Object> body = new HashMap<>();
+      Date date = new Date();
+      body.put("date", date);
+
+      CseHttpEntity<Map<String, Object>> httpEntity = new CseHttpEntity<>(body);
+      httpEntity.addContext("contextKey", "contextValue");
+
+      String srcName = RegistryUtils.getMicroservice().getServiceName();
+
+      ResponseEntity<Date> responseEntity =
+              restTemplate.exchange("cse://springmvcc/springmvchelloc/testHeaderResponse",
+                      HttpMethod.POST, httpEntity, Date.class);
+      Date date1 = responseEntity.getBody();
+      System.out.println(date1);
+      String h1Value = responseEntity.getHeaders().getFirst("h1");
+      System.out.println("except: h1v " + srcName + " real: " + h1Value);
+      String h2Value = responseEntity.getHeaders().getFirst("h2");
+      System.out.println("except: h2v " + srcName + " real: " + h2Value);
+      HttpStatus status = responseEntity.getStatusCode();
+      System.out.println("exceptStatus: 202" + " realStatus: " + status.toString());
+
+      return responseEntity;
   }
 
   public String testAllParam(HttpServletRequest request) {

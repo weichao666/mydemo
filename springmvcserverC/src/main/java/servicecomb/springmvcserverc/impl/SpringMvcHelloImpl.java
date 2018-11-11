@@ -1,13 +1,17 @@
 package servicecomb.springmvcserverc.impl;
 
+import io.swagger.annotations.ResponseHeader;
+import org.apache.servicecomb.core.Const;
 import org.apache.servicecomb.core.Invocation;
 import org.apache.servicecomb.core.invocation.InvocationFactory;
 import org.apache.servicecomb.provider.rest.common.RestSchema;
+import org.apache.servicecomb.swagger.extend.annotations.ResponseHeaders;
 import org.apache.servicecomb.swagger.invocation.context.ContextUtils;
 import org.apache.servicecomb.swagger.invocation.context.InvocationContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +21,7 @@ import servicecomb.demo.bean.Person;
 import servicecomb.demo.common.Hello;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -55,6 +60,17 @@ public class SpringMvcHelloImpl implements Hello {
             .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;")
             .header("custom", "sayhello")
             .body(person);
+  }
+
+//  @ResponseHeaders({@ResponseHeader(name = "h1", response = String.class),
+//  @ResponseHeader(name = "h2", response = String.class)})
+  @RequestMapping(path = "/testHeaderResponse", method = RequestMethod.POST)
+  public ResponseEntity<Date> responseEntity(InvocationContext c1, @RequestAttribute("date") Date date) {
+    HttpHeaders headers = new HttpHeaders();
+    headers.add("h1", "h1v " + c1.getContext().get(Const.SRC_MICROSERVICE));
+    InvocationContext c2 = ContextUtils.getInvocationContext();
+    headers.add("h2", "h2v " + c2.getContext().get(Const.SRC_MICROSERVICE));
+    return new ResponseEntity<>(date, headers, HttpStatus.ACCEPTED);
   }
 
   @RequestMapping(path = "/allparam/{name}", method = RequestMethod.POST)

@@ -34,7 +34,7 @@ cse:
   handler:
     chain:
       Provider:
-        default: tcc-server,bizkeeper-provider,qps-flowcontrol-provider #,auth-provider
+        default: bizkeeper-provider,qps-flowcontrol-provider #,auth-provider
       Consumer:
         default: loadbalance,bizkeeper-consumer,qps-flowcontrol-consumer,tracing-consumer
   isolation:
