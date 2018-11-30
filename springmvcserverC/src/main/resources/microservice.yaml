@@ -21,12 +21,14 @@ cse:
 #    address: 0.0.0.0:8080?protocol=http2
 #  highway:
 #    address: 0.0.0.0:7091
+
   config:
     client:
       serverUri: ${yuming}
       refreshPort: 30104
       refreshMode: 1
       refresh_interval: 5000
+
   monitor:
     client:
       serverUri: ${yuming}
@@ -34,7 +36,7 @@ cse:
   handler:
     chain:
       Provider:
-        default: bizkeeper-provider,qps-flowcontrol-provider #,auth-provider
+        default: bizkeeper-provider,qps-flowcontrol-provider #,tracing-consumer #,auth-provider
       Consumer:
         default: loadbalance,bizkeeper-consumer,qps-flowcontrol-consumer,tracing-consumer
   isolation:
@@ -42,6 +44,9 @@ cse:
       timeout:
         enabled: true
       timeoutInMilliseconds: 60000
+  accesslog:
+    enabled: true
+    pattern: "%h - - %SCB-traceId %t %r %s %B"
 #  tracing: 
 #    collector: 
 #      address: http://zipkin.servicecomb.io:9411
@@ -52,7 +57,7 @@ cse:
 #          category: property  #property,fixed value
 #          propertyName: serviceName
 #          propertyName: version
-#          rule: springmvca
+#          rule: spring*
 #          rule: 0.0.1
 
   credentials:

@@ -34,7 +34,7 @@ cse:
       Provider:
         default: bizkeeper-provider,qps-flowcontrol-provider
       Consumer:
-        default: loadbalance,bizkeeper-consumer,qps-flowcontrol-consumer,auth-consumer
+        default: loadbalance,bizkeeper-consumer,qps-flowcontrol-consumer,auth-consumer,tracing-consumer
 #  request:
 #    timeout: 1000
 #  isolation:
@@ -45,6 +45,9 @@ cse:
 #  fallback:
 #    Consumer:
 #      enabled: false
+  accesslog:
+    enabled: true
+    pattern: "%h - - %SCB-traceId %t %r %s %B"
   credentials:
     accessKey: SSSAFPNRTYAYZTD5ALOH
     secretKey: ur4Sf3spkUFpIBpqQDbRjC3dJRgbe6WU21ueJdge
@@ -72,3 +75,7 @@ cse:
 #      sessionTimeoutInSeconds: 30
 #      successiveFailedTimes: 2
 
+#servicecomb:
+#  loadbalance:
+#    userDefinedEndpoint:
+#      enabled: true

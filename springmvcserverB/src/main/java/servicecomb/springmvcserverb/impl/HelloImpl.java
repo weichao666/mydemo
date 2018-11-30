@@ -55,6 +55,12 @@ public class HelloImpl implements Hello{
     return responseEntity;
   }
 
+  @RequestMapping(path = "/testCookies", method = RequestMethod.GET)
+  public String testCookies() {
+    String response = consumerHello.testCookies();
+    return response;
+  }
+
   @RequestMapping(path = "/allparam/{name}", method = RequestMethod.POST)
   public String testAllParam(@PathVariable(name = "name") String name, @RequestParam("age") int age,
                              @RequestHeader("header") String header, @RequestPart("formdata") int formdata,
@@ -97,6 +103,11 @@ public class HelloImpl implements Hello{
   @GetMapping(path = "/appXml")
   public String testXmlProcessor() {
     String result = consumerHello.testXmlProduceProcessor();
+    return result;
+  }
+  @GetMapping(path = "/testException")
+  public String testException(int code) {
+    String result = consumerHello.testException(code);
     return result;
   }
 }

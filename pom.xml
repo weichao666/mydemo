@@ -12,14 +12,22 @@
   	<module>springmvcserverC</module>
   	<module>springmvcserverB</module>
     <module>javatest</module>
+    <module>jaxrsC</module>
   </modules>
 
   <dependencyManagement>
     <dependencies>
+      <!--<dependency>-->
+        <!--<groupId>org.apache.servicecomb</groupId>-->
+        <!--<artifactId>java-chassis-dependencies</artifactId>-->
+        <!--<version>1.1.0-SNAPSHOT</version>-->
+        <!--<type>pom</type>-->
+        <!--<scope>import</scope>-->
+      <!--</dependency>-->
       <dependency>
         <groupId>com.huawei.paas.cse</groupId>
         <artifactId>cse-dependency</artifactId>
-        <version>2.3.51</version>
+        <version>2.3.52</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -50,6 +58,8 @@
   <!--for package and deploy-->
   <build>
     <plugins>
+      <!--直接生成可执行jar包，不包含依赖的jar包-->
+      <!--打包jar文件时，配置manifest文件，加入lib包的jar依赖，指定main函数入口-->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
@@ -68,6 +78,7 @@
           </archive>
         </configuration>
       </plugin>
+      <!--拷贝依赖的jar包到lib目录-->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
@@ -92,6 +103,32 @@
           <source>1.8</source>
           <target>1.8</target>
         </configuration>
+      </plugin>
+
+      <!--直接生成可执行jar包，包含依赖的jar包-->
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <configuration>
+          <appendAssemblyId>false</appendAssemblyId>
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
+          <archive>
+            <manifest>
+              <!-- 此处指定main方法入口的class -->
+              <mainClass>${your-package}.Application</mainClass>
+            </manifest>
+          </archive>
+        </configuration>
+        <executions>
+          <execution>
+            <id>make-assembly</id>
+            <phase>package</phase>
+            <goals>
+              <goal>assembly</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
