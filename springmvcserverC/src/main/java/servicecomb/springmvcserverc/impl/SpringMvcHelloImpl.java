@@ -20,6 +20,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import servicecomb.demo.bean.JAXBPerson;
+import servicecomb.demo.bean.LombokPerson;
 import servicecomb.demo.bean.Person;
 import servicecomb.demo.common.Hello;
 
@@ -143,6 +144,11 @@ public class SpringMvcHelloImpl implements Hello {
   @RequestMapping(path = "/appXml", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_XML_VALUE)
   public JAXBPerson appXml(@RequestBody JAXBPerson person) {
 //    JAXBPerson person = new JAXBPerson("jake", 20, "developer", "60kg");
+    return person;
+  }
+
+  @RequestMapping(path = "/lombok", method = RequestMethod.POST)
+  public LombokPerson lombok(@RequestBody LombokPerson person) {
     return person;
   }
 }

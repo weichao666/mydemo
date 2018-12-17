@@ -1,11 +1,18 @@
 package servicecomb.demo.bean;
 
+import lombok.Getter;
+import lombok.Setter;
+
 public class Person {
   private String name;
 
-  private int age;
+  private int Age;
   
   private boolean man;
+
+  private Integer eValid;
+
+
 
   public String getName() {
     return name;
@@ -13,14 +20,6 @@ public class Person {
 
   public void setName(String name) {
     this.name = name;
-  }
-
-  public int getAge() {
-    return age;
-  }
-
-  public void setAge(int age) {
-    this.age = age;
   }
 
   public boolean isMan() {
@@ -32,6 +31,22 @@ public class Person {
   }
 
   public String toString() {
-    return "name=" + name + ";age=" + age + ";man=" + man;
+    return "name=" + name + ";age=" + Age + ";man=" + man;
+  }
+
+  public int getAge() {
+    return Age;
+  }
+
+  public void setAge(int age) {
+    Age = age;
+  }
+
+  public Integer geteValid() {
+    return eValid;
+  }
+
+  public void seteValid(Integer eValid) {
+    this.eValid = eValid;
   }
 }

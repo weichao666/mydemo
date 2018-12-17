@@ -4,6 +4,7 @@ APPLICATION_ID: demotest
 service_description:
   name: springmvcc
   version: 0.0.1
+  environment: development
 #instance 
 #instance_description:
 #  properties:
@@ -12,8 +13,8 @@ service_description:
 cse:
   service:
     registry:
-#      address: http://127.0.0.1:30100
-      address: ${yuming}
+      address: http://127.0.0.1:30100
+#      address: ${yuming}
       instance:
         watch: false
   rest:
@@ -31,14 +32,14 @@ cse:
 
   monitor:
     client:
-      serverUri: ${yuming}
-#      enable: false
+      serverUri: https://cse.cn-north-1.myhuaaweicloud.com
+      enable: true
   handler:
     chain:
       Provider:
-        default: bizkeeper-provider,qps-flowcontrol-provider #,tracing-consumer #,auth-provider
-      Consumer:
-        default: loadbalance,bizkeeper-consumer,qps-flowcontrol-consumer,tracing-consumer
+        default: bizkeeper-provider,qps-flowcontrol-provider #,tracing-provider #,auth-provider
+#      Consumer:
+#        default: loadbalance,bizkeeper-consumer,qps-flowcontrol-consumer,tracing-consumer
   isolation:
     Provider:
       timeout:

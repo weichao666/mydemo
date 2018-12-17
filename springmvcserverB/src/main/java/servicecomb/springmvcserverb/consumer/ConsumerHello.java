@@ -34,22 +34,22 @@ public class ConsumerHello {
     System.out.println("serverB try to visit serverC");
     String sayHiResult = "";
 //     ContextUtils.getInvocationContext().addLocalContext("scb-endpoint", "rest://127.0.0.1:8090");
-//      String result = restTemplate.postForObject(
-//              "cse://springmvc/sayhi?name=" + name, null, String.class);
-    HttpHeaders headers = new HttpHeaders();
-    HttpEntity entity = new HttpEntity(headers);
-    try {
-      ResponseEntity<String> response = restTemplate.postForEntity("cse://springmvcc/springmvchelloc/sayhi",
-          entity,
-          String.class);
-    } catch (Exception e) {
-      System.out.println("**************************");
-      e.printStackTrace();
-      System.out.println("#########################");
-      System.out.println("&&&&&&" + e.getMessage() + "$$$$$$$$$$$$$$$$");
-    }
-    System.out.println("Result: " + sayHiResult);
-    return sayHiResult;
+      String result = restTemplate.postForObject(
+              "cse://springmvcc/springmvchelloc/sayhi?name=" + name, null, String.class);
+//    HttpHeaders headers = new HttpHeaders();
+//    HttpEntity entity = new HttpEntity(headers);
+//    try {
+//      ResponseEntity<String> response = restTemplate.postForEntity("cse://springmvcc/springmvchelloc/sayhi",
+//          entity,
+//          String.class);
+//    } catch (Exception e) {
+//      System.out.println("**************************");
+//      e.printStackTrace();
+//      System.out.println("#########################");
+//      System.out.println("&&&&&&" + e.getMessage() + "$$$$$$$$$$$$$$$$");
+//    }
+    System.out.println("Result: " + result);
+    return result;
   }
 
   public String sayHello(Person person) {

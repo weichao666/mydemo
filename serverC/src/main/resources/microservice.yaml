@@ -9,8 +9,8 @@ service_description:
 cse:
   service:
     registry:
-#      address: http://127.0.0.1:30100
-      address: ${yuming}
+      address: http://127.0.0.1:30100,https://cse.cn-north-1.myhuaweicloud.com:443
+#      address: ${yuming}
       instance:
         watch: false
   rest:
