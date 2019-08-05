@@ -1,0 +1,91 @@
+## ---------------------------------------------------------------------------
+## Licensed to the Apache Software Foundation (ASF) under one or more
+## contributor license agreements.  See the NOTICE file distributed with
+## this work for additional information regarding copyright ownership.
+## The ASF licenses this file to You under the Apache License, Version 2.0
+## (the "License"); you may not use this file except in compliance with
+## the License.  You may obtain a copy of the License at
+##
+##      http://www.apache.org/licenses/LICENSE-2.0
+##
+## Unless required by applicable law or agreed to in writing, software
+## distributed under the License is distributed on an "AS IS" BASIS,
+## WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+## See the License for the specific language governing permissions and
+## limitations under the License.
+## ---------------------------------------------------------------------------
+APPLICATION_ID: hiapp-async-demo         #[根据实际修改]
+service_description:
+  name: comment                          #[根据实际修改]
+  version: 0.4.2                         #[根据实际修改]
+  properties:
+    allowCrossApp: true
+  environment: production                #[生产模式:production,开发模式:development]
+cse:
+  service:                               #SC服务注册 建议使用默认配置
+    registry:
+      address: #http://10.21.0.122:30100 #[根据实际修改]
+      instance:
+        healthCheck:
+          interval: 10                   #单位:秒 健康检查间隔时间 根据服务中心管理的规模进行配置 5K左右的规模 当前可以满足。规模增大的时候，需要适当增大时间。
+          times: 2                       #健康检查检测次数 times 和 interval 要匹配服务中心的能力,如果配置不合理，可能导致健康服务异常下线。
+        watch: true                      #watch机制可以快速感知实例变化，提升路由准确性
+        diagnose:
+          interval: 10                   #本地服务缓存和服务中心数据同步,以服务中心为准，对本地缓存进行刷新 单位:小时
+  config:                                #CC配置中心 建议使用默认配置
+    client:
+      serverUri: #http://127.0.0.1:30103 #[根据实际修改] #配置中心连接地址，可选，如果不配置，则不连接配置中心
+      refreshMode: 1                     #刷新模式，0表示push，1表示pull，默认为0，表示推的模式，可选
+      refreshPort: 30104                 #当刷新模式为0时，建立watch websocket的服务中心的端口，默认为30104，可选
+      refresh_interval: 5000             #刷新间隔时间，当刷新模式为1时，去配置中心拉取配置的间隔时间，默认为30000毫秒，可选
+      first_refresh_interval: 5000
+      api:
+        version: v3                        #配置中心的接口版本，默认为v3，可选
+  monitor:                               #对接微服务治理Dashboard Service
+    client:
+      serverUri: #http://127.0.0.1:30109 #[根据实际修改]
+      sslEnalbed: false                  #[根据实际修改] Dashboard Service开启https，需要设置为true
+      enable: true                       #[根据实际修改] 开启对接Dashboard Service，如果不需要对接，修改为false
+  rest: #监听配置
+    address: #127.0.0.1:38082?sslEnabled=false #[根据实际修改]管理类微服务建议使用HTTPS，需要开启SSL开关并配置证书信息
+    server:
+      thread-count: 8                    #服务端线程数,可以认为是I/O工作线程
+      connection-limit: 10000            #允许客户端最大连接数，单个服务端不允许超过1W个连接，如果超过需要评审
+      compression: true                  #支持服务端压缩
+      maxHeaderSize: 8192                #HTTP消息头的最大长度设置为8K
+      connection:
+        idleTimeoutInSeconds: 60         # 服务端连接超时时间，一个连接在指定时间内没有接收到请求,就主动关闭该连接
+  #  executors:                            #业务实际情况使用隔离仓 隔离仓配置按照schemaId和操作名配置线程隔离仓
+  #    Provider:
+  #      app.getAppInfo: appinfo-query-threadPool
+  executor:                              #CSE原生线程池 在同步微服务调用时，可能无法满足业务的诉求，建议使用隔离仓做线程池隔离
+    default:
+      thread-per-group: 200              #同步开发模式下面的默认工作线程数
+  #  uploads:                              #业务根据使用情况开启规划
+  #    directory: /home/upload             #文件上传目录,有上传下载功能的
+  #    maxSize: 10485760                   #上传文件body大小,建议设置为10M
+  #    maxFileSize: 3                      #一次支持上传的文件个数,建议为3个
+  handler:                               #默认包含服务端流控、服务治理,不要随便调整次序。在POM文件中，要配置这些类库的Maven依赖
+    chain:
+      Provider:
+        default: qps-flowcontrol-provider,bizkeeper-provider
+  #  datacenter:                           #配置机房亲和性策略
+  #    name: AppGallery                    #数据中心名称
+  #    region: North-China                 #区域
+  #    availableZone: JiuXianQiao          #AZ
+  flowcontrol:
+    Provider:                            #服务端限流
+      qps:
+        global:
+          limit: 10000                   #全局限流,包含所有的接口流量,默认设置为1W QPS(对微服务所有接口流控,可以通过服务治理Portal动态修改)
+  #        limit:                          #差异化流控
+  #          serivce:                      #关键字为 serivce: 指调用该provider的consumer
+  #            schema:                     #关键字为 schema:  对服务的schema进行限流,实际取值为schema名
+  #              operation: 100            #关键字为 operation: 对服务的schema的操作级别进行限流,实际取值为操作名
+  accesslog:                             #开启CSE的接口日志
+    enabled: true
+  metrics:                               #开启CSE的性能统计接口日志 打印线程池、消息队列、服务调用时延等关键KPI指标
+    publisher:
+      defaultLog:
+        enabled: true
+        
