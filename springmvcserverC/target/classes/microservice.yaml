@@ -1,11 +1,11 @@
-yuming: https://cse.cn-north-1.myhuaweicloud.com:443
+yuming: https://cse.cn-north-4.myhuaweicloud.com:443
 
 APPLICATION_ID: demotest
 service_description:
   name: springmvcc
   version: 0.0.1
-  environment: development
-#instance 
+#  environment: development
+#instance
 #instance_description:
 #  properties:
 #    tag: test
@@ -13,18 +13,19 @@ service_description:
 cse:
   service:
     registry:
-      address: http://127.0.0.1:30100
-#      address: ${yuming}
+      #      address: https://119.3.202.162:30100
+      address: ${yuming}
       instance:
         watch: false
   rest:
     address: 0.0.0.0:8091
-#    address: 0.0.0.0:8080?protocol=http2
-#  highway:
-#    address: 0.0.0.0:7091
+  #    address: 0.0.0.0:8080?protocol=http2
+  #  highway:
+  #    address: 0.0.0.0:7091
 
   config:
     client:
+      #      serverUri: https://119.3.202.162:30103
       serverUri: ${yuming}
       refreshPort: 30104
       refreshMode: 1
@@ -32,37 +33,42 @@ cse:
 
   monitor:
     client:
-      serverUri: https://cse.cn-north-1.myhuaaweicloud.com
+      #      serverUri: https://119.3.202.162:30109
+      serverUri: ${yuming}
       enable: true
   handler:
     chain:
       Provider:
         default: bizkeeper-provider,qps-flowcontrol-provider #,tracing-provider #,auth-provider
-#      Consumer:
-#        default: loadbalance,bizkeeper-consumer,qps-flowcontrol-consumer,tracing-consumer
+  #      Consumer:
+  #        default: loadbalance,bizkeeper-consumer,qps-flowcontrol-consumer,tracing-consumer
   isolation:
     Provider:
       timeout:
         enabled: true
       timeoutInMilliseconds: 60000
+  uploads:
+    directory: .
   accesslog:
     enabled: true
     pattern: "%h - - %SCB-traceId %t %r %s %B"
-#  tracing: 
-#    collector: 
-#      address: http://zipkin.servicecomb.io:9411
-#  publicKey:
-#    accessControl:
-#      black:
-#        list01:
-#          category: property  #property,fixed value
-#          propertyName: serviceName
-#          propertyName: version
-#          rule: spring*
-#          rule: 0.0.1
+  #  tracing:
+  #    collector:
+  #      address: http://zipkin.servicecomb.io:9411
+  #  publicKey:
+  #    accessControl:
+  #      black:
+  #        list01:
+  #          category: property  #property,fixed value
+  #          propertyName: serviceName
+  #          propertyName: version
+  #          rule: spring*
+  #          rule: 0.0.1
 
   credentials:
+    #    accessKey: AONYCAOM6ZA0WGN532SE
+    #    secretKey: CL6FFLnHKona7gvbEzCx7baSDcP3UbePljhg5Pdh
     accessKey: SSSAFPNRTYAYZTD5ALOH
     secretKey: ur4Sf3spkUFpIBpqQDbRjC3dJRgbe6WU21ueJdge
-    project: cn-north-1
+    project: cn-north-4
     akskCustomCipher: default

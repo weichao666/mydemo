@@ -53,10 +53,10 @@ cse:
     secretKey: ur4Sf3spkUFpIBpqQDbRjC3dJRgbe6WU21ueJdge
     project: cn-north-1
     akskCustomCipher: default
-  loadbalance:
-    retryEnabled: true
-    retryOnSame: 0
-    retryOnNext: 1
+#  loadbalance:
+#    retryEnabled: true
+#    retryOnSame: 0
+#    retryOnNext: 1
 #    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.WeightedResponseTimeRule
 #    springmvcc:
 #      transactionControl:

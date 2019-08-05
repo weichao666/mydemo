@@ -1,4 +1,5 @@
 yuming: https://cse.cn-north-1.myhuaweicloud.com:443
+#yuming: https://cse.ru-northwest-2.myhuaweicloud.com:443
 
 APPLICATION_ID: demotest
 service_description:
@@ -52,11 +53,14 @@ cse:
     accessKey: SSSAFPNRTYAYZTD5ALOH
     secretKey: ur4Sf3spkUFpIBpqQDbRjC3dJRgbe6WU21ueJdge
     project: cn-north-1
+#    accessKey: DDRJHRLUEQLW64TER5AM
+#    secretKey: kel3rbhF1qsQVDfoKERwpvICJTirz7araKEZXT2m
+#    project: ru-northwest-2
     akskCustomCipher: default
-  loadbalance:
-    retryEnabled: true
-    retryOnSame: 0
-    retryOnNext: 1
+#  loadbalance:
+#    retryEnabled: true
+#    retryOnSame: 0
+#    retryOnNext: 1
 #    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.WeightedResponseTimeRule
 #    springmvcc:
 #      transactionControl:

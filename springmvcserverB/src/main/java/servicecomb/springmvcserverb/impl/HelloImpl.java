@@ -1,12 +1,16 @@
 package servicecomb.springmvcserverb.impl;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.servicecomb.provider.rest.common.RestSchema;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
 import servicecomb.demo.bean.Person;
@@ -14,8 +18,13 @@ import servicecomb.demo.common.Hello;
 import servicecomb.springmvcserverb.consumer.ConsumerHello;
 
 import javax.servlet.http.HttpServletRequest;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.Date;
 import java.util.Map;
+
+import com.google.common.base.Charsets;
 
 @RestSchema(schemaId = "springmvcHello")
 @RequestMapping(path = "/springmvchellob", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -109,5 +118,11 @@ public class HelloImpl implements Hello{
   public String testException(int code) {
     String result = consumerHello.testException(code);
     return result;
+  }
+
+  @GetMapping(path = "/uploadfile")
+  public void testUploadFile() {
+    String result = consumerHello.fromPart_rt();
+    System.out.println(result);
   }
 }

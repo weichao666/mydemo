@@ -3,6 +3,7 @@ package servicecomb.springmvcserverc.impl;
 import io.swagger.annotations.ResponseHeader;
 import io.vertx.core.cli.annotations.DefaultValue;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.servicecomb.core.Const;
 import org.apache.servicecomb.core.Invocation;
 import org.apache.servicecomb.core.invocation.InvocationFactory;
@@ -18,6 +19,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import servicecomb.demo.bean.JAXBPerson;
 import servicecomb.demo.bean.LombokPerson;
@@ -26,11 +28,14 @@ import servicecomb.demo.common.Hello;
 
 import javax.servlet.http.HttpServletRequest;
 
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
+import com.google.common.base.Charsets;
 
 @RestSchema(schemaId = "springmvcHello")
 @RequestMapping(path = "/springmvchelloc", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -40,6 +45,12 @@ public class SpringMvcHelloImpl implements Hello {
   @Override
   @RequestMapping(path = "/sayhi", method = RequestMethod.POST)
   public String sayHi(@RequestParam("name") String name) {
+    System.out.println("instance1");
+    return "instance1:" + name;
+  }
+
+  @RequestMapping(path = "/sayhi1", method = RequestMethod.POST)
+  public String sayHi1(@RequestParam("name") long name) {
     System.out.println("instance1");
     return "instance1:" + name;
   }
@@ -150,5 +161,21 @@ public class SpringMvcHelloImpl implements Hello {
   @RequestMapping(path = "/lombok", method = RequestMethod.POST)
   public LombokPerson lombok(@RequestBody LombokPerson person) {
     return person;
+  }
+
+  @PostMapping(path = "fromPart", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.TEXT_PLAIN_VALUE)
+  public String fromPart(@RequestPart("input") MultipartFile input,
+      @RequestPart(value = "input2") MultipartFile input2,
+      @RequestPart(name = "input3") MultipartFile input3) {
+    try (InputStream is1 = input.getInputStream(); InputStream is2 = input2
+        .getInputStream(); InputStream is3 = input3.getInputStream()) {
+      String content1 = IOUtils.toString(is1, Charsets.UTF_8);
+      String content2 = IOUtils.toString(is2, Charsets.UTF_8);
+      String content3 = IOUtils.toString(is3, Charsets.UTF_8);
+      return content1 + "," + content2 + "," + content3;
+    } catch (Exception e) {
+      System.out.println("error: " + e.getMessage());
+      throw new IllegalArgumentException(e);
+    }
   }
 }

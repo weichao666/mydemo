@@ -1,5 +1,6 @@
 package servicecomb.springmvcserverb.consumer;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.servicecomb.core.Invocation;
 import org.apache.servicecomb.provider.springmvc.reference.CseHttpEntity;
 import org.apache.servicecomb.provider.springmvc.reference.RestTemplateBuilder;
@@ -7,8 +8,12 @@ import org.apache.servicecomb.serviceregistry.RegistryUtils;
 import org.apache.servicecomb.swagger.invocation.context.ContextUtils;
 import org.apache.servicecomb.swagger.invocation.exception.InvocationException;
 import org.json.JSONObject;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
@@ -23,8 +28,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.util.*;
+
+import com.google.common.base.Charsets;
 
 @Component
 public class ConsumerHello {
@@ -196,5 +204,38 @@ public class ConsumerHello {
       System.out.println("[557 error] body:" + e.getErrorData());
     }
     return "done";
+  }
+
+  public String fromPart_rt() {
+    String file1Content = "default Hello World";
+    String file2Content = "fromValue Hello World";
+    String file3Content = "fromName Hello World";
+    File file1 = null;
+    File file2 = null;
+    File file3 = null;
+    try {
+      file1 = File.createTempFile("upload1", ".txt");
+      file2 = File.createTempFile("upload2", "txt");
+      file3 = File.createTempFile("upload3", "txt");
+      FileUtils.writeStringToFile(file1, file1Content, Charsets.UTF_8);
+      FileUtils.writeStringToFile(file2, file2Content, Charsets.UTF_8);
+      FileUtils.writeStringToFile(file3, file3Content, Charsets.UTF_8);
+    } catch (IOException e) {
+      System.out.println("there's no exception here, " + "here's the exception");
+    }
+
+    MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+    map.add("input", new FileSystemResource(file1));
+    map.add("input2", new FileSystemResource(file2));
+    map.add("input3", new FileSystemResource(file3));
+
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+
+    String result = restTemplate.postForObject("cse://springmvcc/springmvchelloc/fromPart",
+            new HttpEntity<>(map, headers),
+            String.class);
+    Assert.hasText("default Hello World,fromValue Hello World,fromName Hello World", result);
+    return result;
   }
 }
