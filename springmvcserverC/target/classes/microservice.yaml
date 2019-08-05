@@ -1,4 +1,4 @@
-yuming: https://cse.cn-north-4.myhuaweicloud.com:443
+yuming: https://cse.cn-north-1.myhuaweicloud.com:443
 
 APPLICATION_ID: demotest
 service_description:
@@ -66,9 +66,7 @@ cse:
   #          rule: 0.0.1
 
   credentials:
-    #    accessKey: AONYCAOM6ZA0WGN532SE
-    #    secretKey: CL6FFLnHKona7gvbEzCx7baSDcP3UbePljhg5Pdh
     accessKey: SSSAFPNRTYAYZTD5ALOH
     secretKey: ur4Sf3spkUFpIBpqQDbRjC3dJRgbe6WU21ueJdge
-    project: cn-north-4
+    project: cn-north-1
     akskCustomCipher: default
