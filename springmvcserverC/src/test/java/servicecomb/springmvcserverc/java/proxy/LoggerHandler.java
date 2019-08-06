@@ -1,4 +1,4 @@
-package servicecomb.springmvcserverc.java;
+package servicecomb.springmvcserverc.java.proxy;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;

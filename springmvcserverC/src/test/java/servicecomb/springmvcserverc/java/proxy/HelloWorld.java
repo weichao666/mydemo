@@ -1,4 +1,4 @@
-package servicecomb.springmvcserverc.java;
+package servicecomb.springmvcserverc.java.proxy;
 
 public class HelloWorld implements IHelloWorld {
   @Override

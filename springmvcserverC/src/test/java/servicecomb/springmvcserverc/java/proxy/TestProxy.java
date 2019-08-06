@@ -1,8 +1,12 @@
-package servicecomb.springmvcserverc.java;
+package servicecomb.springmvcserverc.java.proxy;
 
 import java.lang.reflect.Proxy;
 
 import org.junit.Test;
+
+import servicecomb.springmvcserverc.java.proxy.HelloWorld;
+import servicecomb.springmvcserverc.java.proxy.IHelloWorld;
+import servicecomb.springmvcserverc.java.proxy.LoggerHandler;
 
 public class TestProxy {
   @Test
