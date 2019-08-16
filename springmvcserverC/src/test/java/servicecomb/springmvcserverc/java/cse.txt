@@ -1,0 +1,4 @@
+servicecomb: https://docs.servicecomb.io/java-chassis/zh_CN/start/terminology.html
+21day: https://education.huaweicloud.com:8443/courses/course-v1:HuaweiX+CBUCNXP012+Self-paced/courseware/da725ede26794694a621b8088a858743/7e29b3e1fa97458fb68bc54120805b1a/
+cse注册、注销机制：https://bbs.huaweicloud.com/forum/thread-9829-1-1.html
+不断服重试机制：https://github.com/apache/servicecomb-java-chassis/issues/1238
