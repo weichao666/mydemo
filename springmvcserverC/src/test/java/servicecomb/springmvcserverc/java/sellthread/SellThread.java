@@ -7,6 +7,7 @@ public class SellThread implements Runnable{
   @Override
   public void run() {
     while (true) {
+      //使用synchronized来加锁
 //      synchronized (key) {
         if (i > 0) {
           try {
