@@ -1,5 +1,8 @@
 # 目录
+
+
 [TOC]
+
 ## question
 
 ## 1、JDK和JRE有什么区别？
@@ -24,4 +27,31 @@ System.out.println(x.equals(y)); //true
 System.out.println(x.equals(z)); //true
 ```
 代码解读：因为x和y指向的是同一个引用，所以==也是true，而new String()方法则重写开辟了内存空间，所以==结果为false，而equals比较的一直是值，所以结果都为true；
-###
+### equals解读：
+equals本质上就是==，只不过String和Integer等重写了equals方法，把它变成了值比较；
+equals源码：
+```java
+public boolean equals(Object obj) {
+  return (this == obj);
+}
+```
+首先来看默认情况下equals比较一个有相同值的对象，代码如下：
+```java
+class Cat {
+  public Cat(String name) {
+    this.name = name;
+  }
+  private String name;
+  public String getName() { return name;}
+  public void setName(String name) {this.name = name;}
+}
+
+Cat c1 = new Cat("miaomi");
+Cat c2 = new Cat("miaomi");
+System.out.println(c1.equals(c2)); //false
+```
+输出结果是false;
+即：比较普通对象时，equals比较的是引用，所以不同，而比较String和Integer等类型时，因为重写了equals方法，变成了值比较，也就相同了；
+
+总结：==对于基本类型来说是值比较，对于引用类型来说比较的是引用；
+      equals默认情况下是引用比较，只是很多类重写了equals方法，比如String、Integer等把它变成了值比较，所以一般情况下equals比较的是值是否相等；
