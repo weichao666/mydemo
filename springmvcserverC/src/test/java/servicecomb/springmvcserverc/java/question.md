@@ -1,5 +1,5 @@
 # 目录
-[toc]
+[TOC]
 ## question
 
 ## 1、JDK和JRE有什么区别？
