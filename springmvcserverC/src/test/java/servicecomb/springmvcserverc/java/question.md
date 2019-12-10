@@ -2,7 +2,16 @@
 
 
 [TOC]
+=================
 
+* [目录](#%E7%9B%AE%E5%BD%95)
+  * [question](#question)
+  * [1、JDK和JRE有什么区别？](#1jdk%E5%92%8Cjre%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB)
+  * [2、==和equals的区别是什么？](#2%E5%92%8Cequals%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88)
+    * [==解读：](#%E8%A7%A3%E8%AF%BB)
+    * [equals解读：](#equals%E8%A7%A3%E8%AF%BB)
+
+* [目录](#2、==和equals的区别是什么？)
 ## question
 
 ## 1、JDK和JRE有什么区别？
