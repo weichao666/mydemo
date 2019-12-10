@@ -1,5 +1,3 @@
-# 目录
-
 
 [TOC]
 =================
@@ -10,9 +8,6 @@
   * [2、==和equals的区别是什么？](#2%E5%92%8Cequals%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88)
     * [==解读：](#%E8%A7%A3%E8%AF%BB)
     * [equals解读：](#equals%E8%A7%A3%E8%AF%BB)
-
-* [目录](#2、==和equals的区别是什么？)
-## question
 
 ## 1、JDK和JRE有什么区别？
 JDK：Java Development Kit的简称，java开发工具包，提供了java的开发环境和运行环境；
@@ -64,3 +59,21 @@ System.out.println(c1.equals(c2)); //false
 
 总结：==对于基本类型来说是值比较，对于引用类型来说比较的是引用；
       equals默认情况下是引用比较，只是很多类重写了equals方法，比如String、Integer等把它变成了值比较，所以一般情况下equals比较的是值是否相等；
+
+## 3、两个对象的hashCode()相同，则equals()也一定为true，对吗？
+```java
+String str1 = "通话";
+String str2 = "重地";
+System.out.println(String.format("str1：%d | str2：%d", str1.hashCode(),str2.hashCode()));
+System.out.println(str1.equals(str2));
+```
+执行的结果：
+```java
+str1：1179395 | str2：1179395
+false
+```
+代码解读：很显然“通话”的“重地”的hashCode()相同，然而equals()则为false，
+hashCode(方法)是jdk根据对象的地址或者字符串或者数字算出来的int类型的数值；
+而equals()是Object中的方法,默认返回==的比较值，相当于两对象之间的属性（成员变量）“相等”，意即具有相同的行为（方法）；
+结论：两个对象equals为真，那么hashcode一定相同；反之，两个对象的hashcode相同，但是equals不一定为真；
+
