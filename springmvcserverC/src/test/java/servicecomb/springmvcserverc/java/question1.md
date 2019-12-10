@@ -1,13 +1,24 @@
 
-[TOC]
-=================
-
-* [目录](#%E7%9B%AE%E5%BD%95)
-  * [question](#question)
+* [[TOC]](#toc)
   * [1、JDK和JRE有什么区别？](#1jdk%E5%92%8Cjre%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB)
   * [2、==和equals的区别是什么？](#2%E5%92%8Cequals%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88)
     * [==解读：](#%E8%A7%A3%E8%AF%BB)
     * [equals解读：](#equals%E8%A7%A3%E8%AF%BB)
+  * [3、两个对象的hashCode()相同，则equals()也一定为true，对吗？](#3%E4%B8%A4%E4%B8%AA%E5%AF%B9%E8%B1%A1%E7%9A%84hashcode%E7%9B%B8%E5%90%8C%E5%88%99equals%E4%B9%9F%E4%B8%80%E5%AE%9A%E4%B8%BAtrue%E5%AF%B9%E5%90%97)
+  * [4、final在java中有什么作用？](#4final%E5%9C%A8java%E4%B8%AD%E6%9C%89%E4%BB%80%E4%B9%88%E4%BD%9C%E7%94%A8)
+  * [5、java中的Math\.round(\-1\.5)等于多少？](#5java%E4%B8%AD%E7%9A%84mathround-15%E7%AD%89%E4%BA%8E%E5%A4%9A%E5%B0%91)
+  * [6、String属于基础的数据类型吗？](#6string%E5%B1%9E%E4%BA%8E%E5%9F%BA%E7%A1%80%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%90%97)
+  * [7、java中操作字符串都有哪些类？他们之间有什么区别？](#7java%E4%B8%AD%E6%93%8D%E4%BD%9C%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%E7%B1%BB%E4%BB%96%E4%BB%AC%E4%B9%8B%E9%97%B4%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB)
+  * [8、String str = "i" 与String str = new String("i")一样吗？](#8string-str--i-%E4%B8%8Estring-str--new-stringi%E4%B8%80%E6%A0%B7%E5%90%97)
+  * [9、如何将字符串反转？](#9%E5%A6%82%E4%BD%95%E5%B0%86%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8F%8D%E8%BD%AC)
+  * [10、String类的常用方法都有哪些？](#10string%E7%B1%BB%E7%9A%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B)
+  * [11、 抽象类必须要有抽象方法吗？](#11-%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%BF%85%E9%A1%BB%E8%A6%81%E6%9C%89%E6%8A%BD%E8%B1%A1%E6%96%B9%E6%B3%95%E5%90%97)
+  * [12、普通类和抽象类有哪些区别？](#12%E6%99%AE%E9%80%9A%E7%B1%BB%E5%92%8C%E6%8A%BD%E8%B1%A1%E7%B1%BB%E6%9C%89%E5%93%AA%E4%BA%9B%E5%8C%BA%E5%88%AB)
+  * [13、抽象类能使用 final 修饰吗？](#13%E6%8A%BD%E8%B1%A1%E7%B1%BB%E8%83%BD%E4%BD%BF%E7%94%A8-final-%E4%BF%AE%E9%A5%B0%E5%90%97)
+  * [14、接口和抽象类有什么区别？](#14%E6%8E%A5%E5%8F%A3%E5%92%8C%E6%8A%BD%E8%B1%A1%E7%B1%BB%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB)
+  * [15、java 中 IO 流分为几种？](#15java-%E4%B8%AD-io-%E6%B5%81%E5%88%86%E4%B8%BA%E5%87%A0%E7%A7%8D)
+  * [16、BIO、NIO、AIO 有什么区别？](#16bionioaio-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB)
+  * [17、 Files的常用方法都有哪些？](#17-files%E7%9A%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B)
 
 ## 1、JDK和JRE有什么区别？
 JDK：Java Development Kit的简称，java开发工具包，提供了java的开发环境和运行环境；
