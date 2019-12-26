@@ -121,4 +121,16 @@ public class TestHashMapList {
     System.out.println("remove = " + queue.remove()); //返回第一个元素，并在队列中删除  //remove() 失败的时候会抛出异常
     System.out.println(queue);
   }
+
+  @Test
+  public void testArray() {
+    //对象数组
+    Person[] person = new Person[5];
+    Person p1 = new Person("aa", 18, true, 18);
+    Person p2 = new Person("bb", 19, false, 19);
+
+    person[0] = p1;
+    person[1] = p2;
+    System.out.println(person[0].toString() + person[1]);
+  }
 }
