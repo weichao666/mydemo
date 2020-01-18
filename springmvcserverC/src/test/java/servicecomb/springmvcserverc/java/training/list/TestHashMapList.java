@@ -1,4 +1,4 @@
-package servicecomb.springmvcserverc.java.training;
+package servicecomb.springmvcserverc.java.training.list;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package servicecomb.springmvcserverc.java.training;
+package servicecomb.springmvcserverc.java.training.number;
 
 import java.util.Scanner;
 

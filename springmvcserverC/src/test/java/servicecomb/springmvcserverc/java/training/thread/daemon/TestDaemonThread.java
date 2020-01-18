@@ -1,4 +1,4 @@
-package servicecomb.springmvcserverc.java.training.thread;
+package servicecomb.springmvcserverc.java.training.thread.daemon;
 
 import java.util.concurrent.TimeUnit;
 

@@ -3,6 +3,9 @@ package servicecomb.springmvcserverc.java.training.thread;
 public class TestThread {
   public static void main(String[] args) throws Exception {
     MyThread thread = new MyThread();
+    //一般用法
+//    thread.start();
+    //少见用法
     new Thread(thread, "线程1").start();
     new Thread(thread, "线程2").start();
   }
