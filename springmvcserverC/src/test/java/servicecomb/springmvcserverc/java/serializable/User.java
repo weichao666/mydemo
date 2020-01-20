@@ -6,7 +6,9 @@ public class User implements Serializable {
   private static final long serialVersionUID = 1L;
   private String userId;
   private String userName;
-  private int age;
+  //Transient 关键字的作用是控制变量的序列化，在变量声明前加上该关键字，可以阻止该变量被序列化到文件中，
+  //在被反序列化后，transient 变量的值被设为初始值，如 int 型的是 0，对象型的是 null
+  private transient int age;
 
   public String getUserId() {
     return userId;

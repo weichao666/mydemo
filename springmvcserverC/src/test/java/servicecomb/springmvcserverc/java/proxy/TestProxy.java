@@ -1,12 +1,8 @@
 package servicecomb.springmvcserverc.java.proxy;
 
-import java.lang.reflect.Proxy;
-
 import org.junit.Test;
 
-import servicecomb.springmvcserverc.java.proxy.HelloWorld;
-import servicecomb.springmvcserverc.java.proxy.IHelloWorld;
-import servicecomb.springmvcserverc.java.proxy.LoggerHandler;
+import java.lang.reflect.Proxy;
 
 public class TestProxy {
   @Test
@@ -21,6 +17,7 @@ public class TestProxy {
   @Test
   public void testProxy2() {
     LoggerHandler handler = new LoggerHandler();
+    //方式二：将工具类Proxy.newProxyInstance写在LoggerHandler里
     IHelloWorld proxy = (IHelloWorld) handler.newProxyInstance(new HelloWorld());
     System.out.println();
     proxy.sayHello();

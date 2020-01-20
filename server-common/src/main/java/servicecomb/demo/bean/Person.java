@@ -12,7 +12,15 @@ public class Person {
 
   private Integer eValid;
 
+  public Person() {
+  }
 
+  public Person(String name, int age, boolean man, Integer eValid) {
+    this.name = name;
+    Age = age;
+    this.man = man;
+    this.eValid = eValid;
+  }
 
   public String getName() {
     return name;
@@ -31,7 +39,7 @@ public class Person {
   }
 
   public String toString() {
-    return "name=" + name + ";age=" + Age + ";man=" + man;
+    return "name=" + name + ";age=" + Age + ";man=" + man + ";eValid=" + eValid;
   }
 
   public int getAge() {

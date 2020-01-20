@@ -1,10 +1,6 @@
 package servicecomb.springmvcserverc.java.serializable;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 
 import org.junit.Test;
 
@@ -22,7 +18,10 @@ public class TestSerializable {
       user.setUserId("1");
       user.setUserName("aaa");
       user.setAge(18);
-      ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(new File("out/test.txt")));
+      //用File打开本地文件，也可直接在new FileOutputStream的构造方法里写文件路径，构造方法里会去调用new File
+      // 实例化FileOutputStream，打开输出流
+      //ObjectOutputStream——用来向文件中写入对象
+      ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("D:\\code\\mydemo\\springmvcserverC\\src\\test\\java\\servicecomb\\springmvcserverc\\java\\serializable\\out\\test.txt"));
       objectOutputStream.writeObject(user);
       System.out.println("序列化成功");
       objectOutputStream.close();
@@ -34,10 +33,10 @@ public class TestSerializable {
   private static User readUser() {
     User user = null;
     try {
-      ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(new File("out/test.txt")));
+      ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("D:\\code\\mydemo\\springmvcserverC\\src\\test\\java\\servicecomb\\springmvcserverc\\java\\serializable\\out\\test.txt"));
       user = (User) objectInputStream.readObject();
       System.out.println("反序列化成功");
-      System.out.println("用户编号: " + user.getUserId() + "\n用户姓名: " + user.getUserName() + "\n用户年龄: " + user.getAge());
+      System.out.println("用户编号: " + user.getUserId() + "\n用户姓名: " + user.getUserName() + "\n添加了transient关键字反序列化：用户年龄: " + user.getAge());
     } catch (Exception e) {
       System.out.println("readUser: " + e.getMessage());
     }

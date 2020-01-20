@@ -15,11 +15,6 @@ public class LoggerHandler implements InvocationHandler {
     this.target = target;
   }
 
-  public Object newProxyInstance(Object target) {
-    this.target = target;
-    return Proxy.newProxyInstance(target.getClass().getClassLoader(), target.getClass().getInterfaces(), this);
-  }
-
   //该invoke方法就是调用被代理接口的所有方法时需要调用的，该invoke方法返回的值是被代理接口的一个实现类
   //关联的这个实现类的方法被调用时将被执行
   /*InvocationHandler接口的方法，proxy表示代理，method表示原对象被调用的方法，args表示方法的参数*/
@@ -40,5 +35,11 @@ public class LoggerHandler implements InvocationHandler {
       return result;
     }
     return null;
+  }
+
+  //也可把Proxy这个工具类写在InvocationHandler处理类里，单独写一个方法。
+  public Object newProxyInstance(Object target) {
+    this.target = target;
+    return Proxy.newProxyInstance(target.getClass().getClassLoader(), target.getClass().getInterfaces(), this);
   }
 }
