@@ -1,0 +1,115 @@
+## ---------------------------------------------------------------------------
+## Licensed to the Apache Software Foundation (ASF) under one or more
+## contributor license agreements.  See the NOTICE file distributed with
+## this work for additional information regarding copyright ownership.
+## The ASF licenses this file to You under the Apache License, Version 2.0
+## (the "License"); you may not use this file except in compliance with
+## the License.  You may obtain a copy of the License at
+##
+##      http://www.apache.org/licenses/LICENSE-2.0
+##
+## Unless required by applicable law or agreed to in writing, software
+## distributed under the License is distributed on an "AS IS" BASIS,
+## WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+## See the License for the specific language governing permissions and
+## limitations under the License.
+## ---------------------------------------------------------------------------
+## App gallery microservice consumer template
+## Author: Lilinfeng
+## Date : 20180823
+## version:1.0
+APPLICATION_ID: hiapp-async-demo            #[根据实际修改]
+service_description:
+  name: springmvcClient                     #[根据实际修改]
+  version: 0.0.3                            #[根据实际修改]
+  environment: production                   #[生产模式:production,开发模式:development]
+cse:
+  service:                                  #SC服务注册 建议使用默认配置
+    registry:
+      address: #http://10.21.0.122:30100
+      instance:
+        healthCheck:
+          interval: 10                    #单位:秒 健康检查间隔时间 根据服务中心管理的规模进行配置 5K左右的规模 当前可以满足。规模增大的时候，需要适当增大时间。
+          times: 2                        #健康检查检测次数   times 和 interval 要匹配服务中心的能力,如果配置不合理，可能导致健康服务异常下线。
+        watch: true                       #watch机制可以快速感知实例变化，提升路由准确性
+        diagnose:
+          interval: 10                    #本地服务缓存和服务中心数据同步,以服务中心为准，对本地缓存进行刷新 单位:小时
+  config: #CC配置中心 建议使用默认配置
+    client:
+      serverUri: #http://127.0.0.1:30103    #[根据实际修改] #配置中心连接地址，可选，如果不配置，则不连接配置中心
+      refreshMode: 1                        #刷新模式，0表示push，1表示pull，默认为0，表示推的模式，可选
+      refreshPort: 30104                    #当刷新模式为0时，建立watch websocket的服务中心的端口，默认为30104，可选
+      refresh_interval: 5000                #刷新间隔时间，当刷新模式为1时，去配置中心拉取配置的间隔时间，默认为30000毫秒，可选
+      first_refresh_interval: 5000
+      api:
+        version: v3                        #配置中心的接口版本，默认为v3，可选
+  monitor:                                  #对接微服务治理Dashboard Service
+    client:
+      serverUri: #http://127.0.0.1:30109    #[根据实际修改]
+      sslEnalbed: false                     #[根据实际修改] Dashboard Service开启https,需要设置为true
+      enable: true                          #[根据实际修改] 开启对接Dashboard Service,如果不需要对接,修改为false
+  rest:
+    client:
+      thread-count: 8                       #设置客户端网络线程数,系统默认为1,建议设置为8
+      connection:
+        maxPoolSize: 30                     #连接池不要设置太大,不能超过30,对于异步I/O系统,瓶颈通常在后端业务处理,链路过多有风险
+        idleTimeoutInSeconds: 30            #链路空闲时间,达到该阈值后主动关闭HTTP链接
+        keepAlive: true                     #使用HTTP长连接机制,对于内部RPC通信,不能使用短连接,否则有性能问题
+  request:
+    timeout: 500                            #微服务消费端超时时间,默认500毫秒,如果调大到秒级,必须经过评审和评估,否则风险很大
+  handler:                                  #默认包含客户端流控、服务治理和负载均衡功能,不要随便调整次序。在POM文件中，要配置这些类库的Maven依赖
+    chain:
+      Consumer:
+        default: qps-flowcontrol-consumer,loadbalance,bizkeeper-consumer
+  #  datacenter:                              #配置机房亲和性策略
+  #    name: AppGallery                       #数据中心名称
+  #    region: North-China                    #区域
+  #    availableZone: JiuXianQiao             #AZ
+  #  flowcontrol:                             #客户端流控
+  #    Consumer:
+  #      qps:
+  #        limit:
+  #          serivce:                         #关键字为 serivce: 对服务进行限流,实际取值为服务名
+  #            schema:                        #关键字为 schema: 对服务的schema进行限流,实际取值为schema名
+  #              operation: 100               #关键字为 operation: 对服务的schema的操作级别进行限流,实际取值为操作名
+  #  loadbalance:
+  #    retryEnabled: true                     #默认开启重试机制
+  #    retryOnSame: 0                         #不在同一台机器重试,大部分情况下在同一台机器重试会加重目标服务实例的负载，建议切换到其它服务实例重试
+  #    retryOnNext: 1                         #在另外实例上重试次数,默认为0,建议修改为1
+  #    isolation:                             #支持服务级别和全局的故障隔离
+  #      enabled: true                        #开启实例级故障隔离
+  #      continuousFailureThreshold: 100      #[根据实际修改]触发隔离 连续发送100条都失败。业务可根据自己的可靠性指标进行修改,建议修改值为QPS指标
+  #      enableRequestThreshold: 600          #[根据实际修改]隔离门槛 该条件是隔离的必要条件,在1分钟统计周期内调用量达到该门槛才会进入隔离判断逻辑,默认为600,即10TPS,业务可修改
+  #      singleTestTime: 5000                 #[根据实际修改]故障实例单点测试时间,隔离之后,每隔该时间会测试下被隔离的服务实例是否恢复，业务可修改，用于快速恢复
+  #    strategy:
+  #      name: RoundRobin                     #现在支持RoundRobin轮询 Random随机 WeightedResponse返回值权重 SessionStickiness会话粘滞，默认为RoundRobin
+  #  references:
+  #    version-rule: 0+                       #对所有服务的版本依赖范围
+  #  circuitBreaker:
+  #    Consumer:
+  #      enabled: true
+  #      sleepWindowInMilliseconds: 5000      #熔断后，多长时间做恢复测试，如果测试成功则恢复；否则继续熔断
+  #      errorThresholdPercentage: 15         #[根据实际修改]错误率阈值，达到阈值则触发熔断,业务需要根据SLA定制该值
+  #      requestVolumeThreshold: 1000         #[根据实际修改]10s内统计调用次数阈值，超过阈值则触发熔断判断,业务需要根据SLA定制该值
+  #  fallback:                                #容错策略支持全局、微服务和方法级别
+  #    Consumer:
+  #      serivce:                             #关键字为 serivce: 按照服务做容错，实际取值为服务名
+  #        schema:                            #关键字为 schema: 对服务的schema进行配置，实际取值为schema名
+  #          operation:                       #关键字为 operation
+  #            fallbackForce:                 #降级策略
+  #              enable: false                #关闭强制降级开关
+  #              maxConcurrentRequests: 10    #隔离时客户端最大的并发数（同时发起服务调用的线程数，周期为10S）
+  #  fallbackpolicy:                          #容错策略，默认提供returnNull throwException fromCache三种策略，用户可以实现FallbackPolicy接口来定制
+  #    Consumer:
+  #      app:                                 #关键字为 service: 按照服务做容错，实际取值为服务名
+  #        app:                               #关键字为 schema: 对服务的schema进行配置，实际取值为schema名
+  #          getAppInfo:                      #关键字为 operation
+  #            fallbackThrowException:
+  #              policy: throwException       #服务降级时抛出CseException，用户需要捕捉和处理
+  accesslog:                                #开启CSE的接口日志
+    enabled: true
+  metrics:                                  #开启CSE的性能统计接口日志 打印线程池、消息队列、服务调用时延等关键KPI指标
+    publisher:
+      defaultLog:
+        enabled: true
+
