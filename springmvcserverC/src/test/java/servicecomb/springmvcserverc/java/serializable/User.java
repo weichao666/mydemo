@@ -10,6 +10,14 @@ public class User implements Serializable {
   //在被反序列化后，transient 变量的值被设为初始值，如 int 型的是 0，对象型的是 null
   private transient int age;
 
+  public User() {}
+
+  public User(String userId, String userName, int age) {
+    this.userId = userId;
+    this.userName = userName;
+    this.age = age;
+  }
+
   public String getUserId() {
     return userId;
   }
@@ -32,5 +40,14 @@ public class User implements Serializable {
 
   public void setAge(int age) {
     this.age = age;
+  }
+
+  @Override
+  public String toString() {
+    return "User{" +
+            "userId='" + userId + '\'' +
+            ", userName='" + userName + '\'' +
+            ", age=" + age +
+            '}';
   }
 }
