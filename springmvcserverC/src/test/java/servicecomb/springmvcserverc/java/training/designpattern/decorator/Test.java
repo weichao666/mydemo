@@ -1,5 +1,8 @@
 package servicecomb.springmvcserverc.java.training.designpattern.decorator;
 
+/**
+ * 装饰者模式
+ */
 public class Test {
     public static void main(String[] args) {
         Beverage beverage = new CoffeeBean1();  //选择了第一种咖啡豆磨制的咖啡
