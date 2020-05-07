@@ -1,4 +1,4 @@
-package servicecomb.springmvcserverc.java.training.classtest;
+package servicecomb.springmvcserverc.java.training.classtest.parentchildren;
 
 public class A {
     public static String a = printStr("父类的静态变量");

@@ -1,4 +1,4 @@
-package servicecomb.springmvcserverc.java.proxy;
+package servicecomb.springmvcserverc.java.proxy.jdkproxy;
 
 import org.junit.Test;
 

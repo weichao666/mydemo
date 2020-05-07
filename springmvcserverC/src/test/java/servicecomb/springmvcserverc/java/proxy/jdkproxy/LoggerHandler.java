@@ -1,9 +1,10 @@
-package servicecomb.springmvcserverc.java.proxy;
+package servicecomb.springmvcserverc.java.proxy.jdkproxy;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
+//JDK动态代理
 //动态代理类只能代理接口（不支持抽象类），代理类都需要实现InvocationHandler类，实现invoke方法。
 //被代理对象targetObject通过参数传递进来，我们通过targetObject.getClass().getClassLoader()获取ClassLoader对象，然后通过targetObject.getClass().getInterfaces()获取它实现的所有接口，然后将targetObject包装到实现了InvocationHandler接口的LoggerHandler对象中。通过newProxyInstance函数我们就获得了一个动态代理对象。
 public class LoggerHandler implements InvocationHandler {

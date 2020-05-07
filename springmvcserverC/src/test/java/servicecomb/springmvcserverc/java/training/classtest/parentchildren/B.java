@@ -1,4 +1,4 @@
-package servicecomb.springmvcserverc.java.training.classtest;
+package servicecomb.springmvcserverc.java.training.classtest.parentchildren;
 
 public class B extends A {
     public static String b = printStr("子类的静态变量");

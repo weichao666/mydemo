@@ -49,8 +49,8 @@ cse:
     enabled: true
     pattern: "%h - - %SCB-traceId %t %r %s %B"
   credentials:
-    accessKey: SSSAFPNRTYAYZTD5ALOH
-    secretKey: ur4Sf3spkUFpIBpqQDbRjC3dJRgbe6WU21ueJdge
+    accessKey: xx
+    secretKey: xxx
     project: cn-north-1
     akskCustomCipher: default
 #  loadbalance:
