@@ -3,6 +3,9 @@ package servicecomb.springmvcserverc.java.training.thread;
 import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
 
+/**
+ * 实现Callable接口通过FutureTask包装器来创建Thread线程
+ */
 public class TestCallableAndFuture {
   public static void main(String[] args) throws Exception {
     MyCallable myCallable = new MyCallable();
