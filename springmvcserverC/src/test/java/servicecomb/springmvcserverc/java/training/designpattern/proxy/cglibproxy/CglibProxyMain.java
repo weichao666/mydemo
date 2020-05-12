@@ -17,6 +17,7 @@ public class CglibProxyMain {
         //设置目标类
         enhancer.setSuperclass(ArraySort2.class);
         //设置拦截对象，这里直接使用匿名内部类写法
+//        enhancer.setCallback(new InterceptorImpl());
         enhancer.setCallback(new MethodInterceptor() {
             @Override
             public Object intercept(Object object, Method method, Object[] args, MethodProxy methodProxy) throws Throwable {

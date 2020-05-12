@@ -13,6 +13,8 @@ import java.lang.reflect.Method;
  *这时就可以使用继承目标类以目标对象子类的方式实现代理,这种方法就叫做:Cglib代理，也叫作子类代理，
  * 它是在内存中构建一个子类对象从而实现对目标对象功能的扩展.
  */
+//servicecomb.springmvcserverc.java.proxy.cglibproxy也使用了cglib，是原生的cglib
+//这里使用spring包中cglib，其实和引单独的cglib包是一样，只不过spring为了版本不冲突，将cglib包含在自己的包中。
 public class CglibProxy {
     public static Object newProxyInstance(Object target) {
         //实例化一个增强器，也就是cglib中的一个class generator
@@ -20,6 +22,7 @@ public class CglibProxy {
         //设置目标类
         enhancer.setSuperclass(target.getClass());
         //设置拦截对象，这里直接使用匿名内部类写法
+//        enhancer.setCallback(new InterceptorImpl());
         enhancer.setCallback(new MethodInterceptor() {
             @Override
             public Object intercept(Object object, Method method, Object[] args, MethodProxy methodProxy) throws Throwable {

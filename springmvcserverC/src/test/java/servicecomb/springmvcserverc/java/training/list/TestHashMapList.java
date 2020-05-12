@@ -30,10 +30,10 @@ public class TestHashMapList {
     map1.put("aa", "aaa");
     map1.put("cc", "ccc");
     map1.put("ee", "eee");
-//    for (Map.Entry map:map1.entrySet()
-//    ) {
-//      System.out.println(map.toString());
-//    }
+    for (Map.Entry map:map1.entrySet()
+    ) {
+      System.out.println(map.toString());
+    }
 //    System.out.println(map1);
 //    System.out.println(map1.containsKey(null));
     Iterator<String> iterator = map1.keySet().iterator();

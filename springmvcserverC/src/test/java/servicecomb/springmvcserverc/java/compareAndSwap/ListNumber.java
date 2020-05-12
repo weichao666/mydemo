@@ -5,7 +5,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.Test;
 
 public class ListNumber {
-  NumberRise rise = new NumberRise();
+//  NumberRise rise = new NumberRise();
 
   public class ThreadRunnable implements Runnable {
     @Override
