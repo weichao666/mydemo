@@ -6,6 +6,7 @@ public class ThreadPool {
     public static void main(String[] args) throws Exception {
         //一、开发者自定义线程池
         //ThreadPoolExecutor类，常用于自定义线程池
+
         ThreadPoolExecutor threadPoolExecutor1 = new ThreadPoolExecutor(
                 5,
                 5,
